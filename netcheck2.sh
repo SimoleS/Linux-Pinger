@@ -1,8 +1,10 @@
 #!/bin/bash
 ########################################################################
 dest_ip=1.1.1.1 #enter your IP which you want to ping
-path_log=~/ping.log #enter your path for log file
-ping_output=~/ping_output.log #enter your path for ping output log file
+dir_date=$(date +"%d-%m-%Y")
+dir=logs/$dir_date
+path_log=$dir/ping.log #enter your path for log file
+ping_output=$dir/ping_output.log #enter your path for ping output log file
 
 NOW1=$(date +"%T | %d-%m-%Y") #current date in format 24H Time | D-M-Y
 
@@ -11,7 +13,15 @@ timeout_live=5 #how manz seconds wait before next chcek if connection is live
 COUNTER=0 #counting retryies per timeout_dead seconds
 drop=0 #drop counter
 drop_max=10 #set max drop counter which will trigger traceroute
-
+########################################################################
+if [ ! -d "$dir" ]; then
+  mkdir -p $dir
+fi
+########################################################################
+echo ================================================ >> $path_log 
+echo [*] Program started at $NOW1 >> $path_log 
+echo [*] LOGGING SAVED IN $path_log >> $path_log
+echo ================================================ >> $path_log 
 ########################################################################
 echo ================================================
 echo [*] Program started at $NOW
@@ -21,10 +31,6 @@ echo [*] Timeout of Live Ping is $timeout_live Seconds and Death Ping $timeout_d
 echo [*] Maximum of droped packets is $drop_max
 echo [*] Ping target is $dest_ip
 echo ================================================
-echo ================================================ >> $path_log 
-echo [*] Program started at $NOW1 >> $path_log 
-echo [*] LOGGING SAVED IN $path_log >> $path_log
-echo ================================================ >> $path_log 
 ########################################################################
 while [ 1 ]; do
 NOW=$(date +"%T | %d-%m-%Y")
