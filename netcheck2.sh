@@ -9,8 +9,8 @@ ping_output=$dir/ping_output.log #enter your path for ping output log file
 NOW1=$(date +"%T | %d-%m-%Y") #current date in format 24H Time | D-M-Y
 
 timeout_dead=60 #how many seconds wait before next check if connection is unreachable
-timeout_live=5 #how manz seconds wait before next chcek if connection is live
-COUNTER=0 #counting retryies per timeout_dead seconds
+timeout_live=5 #how many seconds wait before next chcek if connection is live
+COUNTER=0 #counting retries per timeout_dead seconds
 drop=0 #drop counter
 drop_max=10 #set max drop counter which will trigger traceroute
 ########################################################################
